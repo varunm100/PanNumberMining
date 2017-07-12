@@ -11,22 +11,23 @@ import urllib.request
 import itertools
 
 start_time = time.time()
-RequestingSPEED = 1020
+RequestingSPEED = 5000
 urls = ['http://searchpan.in/verification_process_run10.php']*RequestingSPEED
 print ('Reuqesting at ' + str(len(urls)) + ' requests!!!!')
 PeopleData = "PeopleData.csv"
 i = 0
+ccccc = 0
 #Pan = ['ABCDE1234A','AAAPA1113A', 'AAAPA0056A', 'AAAPA0248A', 'AAAPA0397A', 'AAAPA0535A', 'AAAPA0577A', 'AAAPA0638A', 'AAAPA0707A', 'AAAPA1002A', ' AAAPA1034A']
 def DataInsersion(DataArg, PanNumber):
 	if 'Invalid PAN' in str(DataArg):
-		print('FOUND INVALID PAN')
-		print(DataArg)
+		pass
+		#print('FOUND INVALID PAN')
+		#print(DataArg)
 	elif str(DataArg) == '':
-		print('FOUND INVALID PAN')
-		print(DataArg)
+		pass
+		#print('FOUND INVALID PAN')
+		#print(DataArg)
 	else:
-		print('Found valid PAN!!!!')
-		print(DataArg)
 		PAN = ''
 		Name = '' 
 		Address = ''
@@ -45,6 +46,13 @@ def DataInsersion(DataArg, PanNumber):
 			PAN = PAN.replace('<td>', '')
 			PAN = PAN[0:10]
 			PAN = PAN.strip()
+			print()
+			print('Found valid PAN!!!!')
+			print()
+			print(PAN)
+			print()
+			print(DataArg)
+			print()
 			Address = td[4]
 			Address = str(Address)
 			Address = Address.replace('<td>', '')
@@ -78,22 +86,24 @@ def DataInsersion(DataArg, PanNumber):
 def ParseDataInFile(Pan):
 	def load_url(url, timeout):
 		currentPan = Pan[counter]
-		print(currentPan)
+		#print(currentPan)
+		print(Pan)
+		sys.exit()
 		Payload = {
 				"panlist" : currentPan,
 				"SUBMIT": "Submit"
 			}
-		print(Payload)
-		print(url)
+		#print(Payload)
+		#print(url)
 		PayloadArgs = urllib.parse.urlencode(Payload)
 		conn = urllib.request.urlopen(url, PayloadArgs.encode("utf-8"))
-		print(soup(conn, "lxml"))
+		#print(soup(conn, "lxml"))
 		DataArgs = soup(conn, "lxml")
-		print("On the " + str(counter) + " iteration")
+		#print("On the " + str(counter) + " iteration")
 		return DataArgs
 
 	counter = 0
-	with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+	with concurrent.futures.ThreadPoolExecutor(max_workers=25) as executor:
 	    future_to_url = {executor.submit(load_url, url, 60): url for url in urls}
 	    for future in concurrent.futures.as_completed(future_to_url):
 	        url = future_to_url[future]
@@ -127,13 +137,14 @@ def main(StartingPan):
 			elif Pan == StartingPan:
 				Continue = True
 				PanList.append(Pan)
-				print("Appended " + str(len(Pan)) + " so far.")
+				#print("Appended " + str(len(Pan)) + " so far.")
 			elif Continue == True:
 				Continue = True
 				PanList.append(Pan)
-				print("Appended " + str(len(Pan)) + " so far.")
+				#print("Appended " + str(len(Pan)) + " so far.")
 			else:
-				print("Finding Starting Point...")
+				pass
+				#print("Finding Starting Point...")
 
-main('AAAPA7440B')
+main('AAAPA7531B')
 #AAAPA8840B
