@@ -9,6 +9,7 @@ import time
 import concurrent.futures
 import urllib.request
 import itertools
+import sys
 
 start_time = time.time()
 RequestingSPEED = 5000
@@ -87,8 +88,7 @@ def ParseDataInFile(Pan):
 	def load_url(url, timeout):
 		currentPan = Pan[counter]
 		#print(currentPan)
-		print(Pan)
-		sys.exit()
+		#print(Pan)
 		Payload = {
 				"panlist" : currentPan,
 				"SUBMIT": "Submit"
@@ -127,13 +127,13 @@ def main(StartingPan):
 	for AlphaBets in itertools.product(alphabet,repeat=5):
 		for Num in itertools.product(digits,repeat=4):
 			Pan = str(str(AlphaBets[0]) + str(AlphaBets[1]) + str(AlphaBets[2]) + 'P' + str(AlphaBets[3]) + str(Num[0]) + str(Num[1]) + str(Num[2]) + str(Num[3]) + str(AlphaBets[4]))
-			if (len(PanList)*AlphaCount) == RequestingSPEED:
+			if (len(PanList)) == RequestingSPEED:
 				print("----------------------------------------------------------")
 				print("Started to send requests for this block of " + str(RequestingSPEED))
 				ParseDataInFile(PanList)
 				print("Data Saved to File")
 				print("----------------------------------------------------------\n")
-				AlphaCount+=1
+				del PanList[:]
 			elif Pan == StartingPan:
 				Continue = True
 				PanList.append(Pan)
@@ -146,5 +146,5 @@ def main(StartingPan):
 				pass
 				#print("Finding Starting Point...")
 
-main('AAAPA7531B')
-#AAAPA8840B
+main('AAAPA2320C')
+#AAAPA2505C
