@@ -142,6 +142,6 @@ def main(StartingPan):
 			else:
 				pass
 
-main('AAAPC8152R')
+main('AAAPL0000A')
 #Next is with Sharma or Shau
 #Nif doesnt work, try, AAAPT1231F
