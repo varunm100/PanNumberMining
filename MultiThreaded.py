@@ -112,6 +112,7 @@ def ParseDataInFile(Pan):
 	            counter+=1
 	        except Exception as exc:
 	            print('%r generated an exception: %s' % (url, exc))
+	            print("Counter is: " + str(Pan[counter]))
 	print (time.time() - start_time)
 
 
@@ -142,6 +143,6 @@ def main(StartingPan):
 			else:
 				pass
 
-main('AAAPL0000A')
+main('AAAPG5354H')
 #Next is with Sharma or Shau
-#Nif doesnt work, try, AAAPT1231F
+#if doesnt work, try, AAAPT1231F
