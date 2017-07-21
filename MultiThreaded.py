@@ -143,6 +143,6 @@ def main(StartingPan):
 			else:
 				pass
 
-main('AAAPG5354H')
+main('AAAPJ3212U')
 #Next is with Sharma or Shau
 #if doesnt work, try, AAAPT1231F
